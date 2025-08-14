@@ -1,13 +1,66 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useEffect } from 'react';
+import { CurtainOpening } from '@/components/CurtainOpening';
+import { MainCards } from '@/components/MainCards';
+import { FreedomFighters } from '@/components/FreedomFighters';
+import { ImageGenerator } from '@/components/ImageGenerator';
+
+type Page = 'opening' | 'main' | 'fighters' | 'generator';
 
 const Index = () => {
+  const [currentPage, setCurrentPage] = useState<Page>('opening');
+  const [hasReducedMotion, setHasReducedMotion] = useState(false);
+
+  useEffect(() => {
+    // Check for reduced motion preference
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setHasReducedMotion(mediaQuery.matches);
+
+    // Skip opening animation if reduced motion is preferred
+    if (mediaQuery.matches) {
+      setCurrentPage('main');
+    }
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setHasReducedMotion(e.matches);
+      if (e.matches && currentPage === 'opening') {
+        setCurrentPage('main');
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, [currentPage]);
+
+  const handleOpeningComplete = () => {
+    setCurrentPage('main');
+  };
+
+  const handleNavigate = (page: 'fighters' | 'generator') => {
+    setCurrentPage(page);
+  };
+
+  const handleBack = () => {
+    setCurrentPage('main');
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      {currentPage === 'opening' && !hasReducedMotion && (
+        <CurtainOpening onComplete={handleOpeningComplete} />
+      )}
+      
+      {currentPage === 'main' && (
+        <MainCards onNavigate={handleNavigate} />
+      )}
+      
+      {currentPage === 'fighters' && (
+        <FreedomFighters onBack={handleBack} />
+      )}
+      
+      {currentPage === 'generator' && (
+        <ImageGenerator onBack={handleBack} />
+      )}
+    </>
   );
 };
 
