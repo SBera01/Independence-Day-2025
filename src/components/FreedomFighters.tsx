@@ -40,126 +40,126 @@ export const FreedomFighters = ({ onBack }: FreedomFightersProps) => {
     {
       id: 'subhas-bose',
       name: 'Subhas Chandra Bose',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Subhas_Chandra_Bose_NRB.jpg',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Subhas_Chandra_Bose_NRB.jpg',
       description: 'Netaji',
       contribution: 'Founded the Indian National Army and fought for complete independence'
     },
     {
       id: 'sardar-patel',
       name: 'Sardar Vallabhbhai Patel',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/0/0c/Sardar_patel_%28cropped%29.jpg',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/f/f2/Sardar_patel_%28cropped%29.jpg',
       description: 'Iron Man of India',
       contribution: 'United 562 princely states into the Indian Union'
     },
     {
       id: 'nehru',
       name: 'Jawaharlal Nehru',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Nehru_portrait.jpg',
+      image: 'https://i.pinimg.com/736x/94/25/0f/94250f1c7e01df1911b028ec0656e3f0.jpg',
       description: 'First Prime Minister',
       contribution: 'Led the independence movement and shaped modern India'
     },
     {
       id: 'rani-lakshmibai',
       name: 'Rani Lakshmibai',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Rani_of_jhansi.jpg',
+      image: 'https://sawanonlinebookstore.com/wp-content/uploads/2022/05/jhansi-ki-rani-laxmibai.jpg',
       description: 'Queen of Jhansi',
       contribution: 'Fought valiantly against British rule in the 1857 revolt'
     },
     {
       id: 'lal-bahadur',
       name: 'Lal Bahadur Shastri',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Lal_Bahadur_Shastri.jpg',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrPh8SORZtBZZDU3u7YE_uzl_Q5RTlCsQ_RQ&s',
       description: 'Second Prime Minister',
       contribution: 'Promoted the White Revolution and Green Revolution'
     },
     {
       id: 'tilak',
       name: 'Bal Gangadhar Tilak',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Bal_Gangadhar_Tilak.jpg',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-MLq9-kqjyeHtQp58oe-aORG6kjt0Eqddtd6t1ZtlElWOU0-zLrJbV01I47IBxci6Urw&usqp=CAU',
       description: 'Lokmanya',
       contribution: 'First leader to demand complete independence (Swaraj is my birthright)'
     },
     {
       id: 'annie-besant',
       name: 'Annie Besant',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Annie_Besant_-_Project_Gutenberg_eText_15388.jpg',
+      image: 'https://madrascourier.com/wp-content/uploads/2017/08/Annie-Besant-Madras-Courier-01.jpg',
       description: 'Home Rule Movement Leader',
       contribution: 'Advocated for Indian self-governance and women\'s rights'
     },
     {
       id: 'lala-lajpat',
       name: 'Lala Lajpat Rai',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Lala_Lajpat_Rai.jpg',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSvYfZRpdPuLo0VpXWCKVJZXIRd1Z4sFC5wg&s',
       description: 'Punjab Kesari',
       contribution: 'Led protests against British policies and partition of Bengal'
     },
     {
       id: 'azad-maulana',
       name: 'Maulana Abul Kalam Azad',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Maulana_Azad.jpg',
+      image: 'https://www.constitutionofindia.net/wp-content/uploads/2022/09/Maulana-Abul-Kalam-Azad.jpg',
       description: 'First Education Minister',
       contribution: 'Promoted education and communal harmony in independent India'
     },
     {
       id: 'sarojini-naidu',
       name: 'Sarojini Naidu',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/c/c7/Sarojini_Naidu.jpg',
+      image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgrmaIAAf6EUJBvKe2JKrBS7prtst7UXHkjCmcdWybPZ81sGI6zuxr1zQ2EQq7RV5D9Yo8An2M9w4kLsMmCkHwaBp3Y4JglzE9qF6CUTzoi0HDpzjSi4jPEBj0gG5KIgYBOWpyPWm8Rj_RL/s0/Portrait+of+Sarojini+Naidu+-+Bombay+1946.jpg',
       description: 'Nightingale of India',
       contribution: 'Poet, politician, and first woman governor of India'
     },
     {
       id: 'chandrashekhar-azad',
       name: 'Chandrashekhar Azad',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/f/fe/Chandrashekhar_Azad.jpg',
+      image: 'https://cdn.britannica.com/40/274440-050-4EC6EAAB/Portrait-Of-Indian-Freedom-Fighter-Chandra-Shekhar-Azad.jpg',
       description: 'Revolutionary Leader',
       contribution: 'Led the Hindustan Republican Association and never surrendered'
     },
     {
       id: 'khan-ghaffar',
       name: 'Khan Abdul Ghaffar Khan',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/5/57/Bacha_Khan.jpg',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/Khan_Abdul_Ghaffar_Khan.jpg',
       description: 'Frontier Gandhi',
       contribution: 'Non-violent independence activist from the frontier province'
     },
     {
       id: 'alluri-raju',
       name: 'Alluri Sitarama Raju',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Alluri_Sitarama_Raju.jpg',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShlmlLv7m9dFguC0uIA7o7oeMM_FCGRW7vW8tJIULH7uiUUDn6_j3OKBURkj8jyPpVuGM&usqp=CAU',
       description: 'Revolutionary of Andhra Pradesh',
       contribution: 'Led the Rampa Rebellion against British colonial rule'
     },
     {
       id: 'kasturba-gandhi',
       name: 'Kasturba Gandhi',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/5/5b/Kasturba_Gandhi_1915.jpg',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Kasturba_Gandhi_1940.jpg/250px-Kasturba_Gandhi_1940.jpg',
       description: 'Freedom Fighter',
       contribution: 'Participated in independence movement alongside Mahatma Gandhi'
     },
     {
       id: 'bharati',
       name: 'Subramania Bharati',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Subramania_Bharati.jpg',
+      image: 'https://madrascourier.com/wp-content/uploads/2019/03/Subramanya-Bharathi-Madras-Courier-07.jpg',
       description: 'Tamil Poet and Freedom Fighter',
       contribution: 'Used poetry to inspire freedom movement and social reform'
     },
     {
       id: 'kumaran',
       name: 'Tiruppur Kumaran',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Tiruppur_Kumaran.jpg',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4eu6Gl08Yo28Pjt5E2AyikWVnilThme9vxw&s',
       description: 'Revolutionary of Tamil Nadu',
       contribution: 'Died holding the Indian flag during protests against British rule'
     },
     {
       id: 'bipin-pal',
       name: 'Bipin Chandra Pal',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/b/b7/Bipin_Chandra_Pal.jpg',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNGGDpzmZKyC1sGGNdlM5yeoEam6drjKki0g&s',
       description: 'Extremist Leader',
       contribution: 'Part of Lal-Bal-Pal trio, advocated for complete independence'
     },
     {
       id: 'ashfaqulla',
       name: 'Ashfaqulla Khan',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Ashfaqulla_Khan.jpg',
+      image: 'https://vault.drishticuet.com/english_file_uploads/1729690572_image9jpeg.jpg',
       description: 'Revolutionary Freedom Fighter',
       contribution: 'Close associate of Ram Prasad Bismil, executed for the Kakori conspiracy'
     }
