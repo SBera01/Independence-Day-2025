@@ -24,6 +24,9 @@ export const MainCards = ({ onNavigate }: MainCardsProps) => {
           {/* Whom You Like Card */}
           <Card 
             className="glass-card hover:scale-105 transition-all duration-300 cursor-pointer group border-0 p-8"
+            style={{
+              boxShadow: 'rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px'
+            }}
             onClick={() => onNavigate('fighters')}
           >
             <CardContent className="text-center space-y-6 p-0">
@@ -47,6 +50,9 @@ export const MainCards = ({ onNavigate }: MainCardsProps) => {
           {/* Generate Image Card */}
           <Card 
             className="glass-card hover:scale-105 transition-all duration-300 cursor-pointer group border-0 p-8"
+            style={{
+              boxShadow: 'rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px'
+            }}
             onClick={() => onNavigate('generator')}
           >
             <CardContent className="text-center space-y-6 p-0">
@@ -72,7 +78,7 @@ export const MainCards = ({ onNavigate }: MainCardsProps) => {
         <div className="text-center mt-12">
           <div className="inline-flex items-center space-x-2 text-muted-foreground">
             <span className="w-2 h-2 bg-saffron rounded-full"></span>
-            <span className="w-2 h-2 bg-primary rounded-full"></span>
+            <span className="w-2 h-2 bg-white rounded-full"></span>
             <span className="w-2 h-2 bg-success rounded-full"></span>
           </div>
           <p className="mt-2 text-sm text-muted-foreground font-poppins">

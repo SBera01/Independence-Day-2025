@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Heart } from 'lucide-react';
 import { toast } from 'sonner';
+import { subscribeToVotes, castVote, syncLocalVotesToFirebase } from '@/lib/firestore';
 
 interface Fighter {
   id: string;
@@ -20,6 +21,7 @@ interface FreedomFightersProps {
 export const FreedomFighters = ({ onBack }: FreedomFightersProps) => {
   const [selectedFighter, setSelectedFighter] = useState<Fighter | null>(null);
   const [votes, setVotes] = useState<Record<string, number>>({});
+  const [isLoading, setIsLoading] = useState(false);
 
   // Freedom fighters data
   const fighters: Fighter[] = [
@@ -165,12 +167,18 @@ export const FreedomFighters = ({ onBack }: FreedomFightersProps) => {
     }
   ];
 
-  // Load votes from localStorage
+  // Load votes from Firebase with real-time updates
   useEffect(() => {
-    const savedVotes = localStorage.getItem('independenceday-votes');
-    if (savedVotes) {
-      setVotes(JSON.parse(savedVotes));
-    }
+    // First, sync any existing localStorage votes to Firebase
+    syncLocalVotesToFirebase();
+    
+    // Set up real-time listener for votes
+    const unsubscribe = subscribeToVotes((firebaseVotes) => {
+      setVotes(firebaseVotes);
+    });
+
+    // Cleanup listener on component unmount
+    return () => unsubscribe();
   }, []);
 
   // Save votes to localStorage
@@ -179,13 +187,59 @@ export const FreedomFighters = ({ onBack }: FreedomFightersProps) => {
     setVotes(newVotes);
   };
 
-  const handleVote = (fighterId: string) => {
-    const currentVotes = votes[fighterId] || 0;
-    const newVotes = { ...votes, [fighterId]: currentVotes + 1 };
-    saveVotes(newVotes);
-    toast.success('Thank you for your tribute! 🇮🇳', {
-      description: 'Your vote has been counted.'
-    });
+  const handleVote = async (fighterId: string) => {
+    if (isLoading) return; // Prevent double-clicking
+    
+    setIsLoading(true);
+    
+    try {
+      const success = await castVote(fighterId);
+      
+      if (success) {
+        toast.success('Thank you for your tribute! 🇮🇳', {
+          description: 'Your vote has been counted and synced to the database.',
+          duration: 4000,
+          style: {
+            background: 'linear-gradient(135deg, #ff9933 0%, #ffffff 50%, #138808 100%)',
+            color: '#000',
+            border: '2px solid #ff9933',
+            borderRadius: '12px',
+            fontWeight: '600',
+            boxShadow: '0 8px 32px rgba(255, 153, 51, 0.3)'
+          },
+          className: 'toast-success-custom'
+        });
+      } else {
+        toast.success('Thank you for your tribute! 🇮🇳', {
+          description: 'Your vote has been saved locally and will sync when online.',
+          duration: 4000,
+          style: {
+            background: 'linear-gradient(135deg, #ff9933 0%, #ffffff 50%, #138808 100%)',
+            color: '#000',
+            border: '2px solid #ff9933',
+            borderRadius: '12px',
+            fontWeight: '600',
+            boxShadow: '0 8px 32px rgba(255, 153, 51, 0.3)'
+          },
+          className: 'toast-success-custom'
+        });
+      }
+    } catch (error) {
+      toast.error('Failed to cast vote', {
+        description: 'Please try again later.',
+        duration: 3000,
+        style: {
+          background: '#fee2e2',
+          color: '#dc2626',
+          border: '2px solid #fca5a5',
+          borderRadius: '12px',
+          fontWeight: '600',
+          boxShadow: '0 8px 32px rgba(220, 38, 38, 0.2)'
+        }
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCardClick = (fighter: Fighter) => {
@@ -201,7 +255,7 @@ export const FreedomFighters = ({ onBack }: FreedomFightersProps) => {
             variant="outline"
             size="sm"
             onClick={onBack}
-            className="glass-card border-primary/20 hover:bg-primary/10"
+            className="glass-card border-primary/20 hover:bg-primary/10 bg-"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back
@@ -251,17 +305,17 @@ export const FreedomFighters = ({ onBack }: FreedomFightersProps) => {
 
       {/* Fighter Modal */}
       <Dialog open={!!selectedFighter} onOpenChange={() => setSelectedFighter(null)}>
-        <DialogContent className="glass-card border-primary/20 max-w-md">
+        <DialogContent className="glass-card border-primary/20 max-w-md bg-card text-card-foreground shadow-lg">
           {selectedFighter && (
             <>
               <DialogTitle className="sr-only">
                 {selectedFighter.name} - Freedom Fighter Details
               </DialogTitle>
-              <div className="text-center space-y-4">
+              <div className="text-center space-y-4 p-2">
                 <img
                   src={selectedFighter.image}
                   alt={selectedFighter.name}
-                  className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-primary/20"
+                  className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-primary/20 shadow-lg"
                   onError={(e) => {
                     e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedFighter.name)}&background=0B4DA2&color=fff&size=128`;
                   }}
@@ -273,12 +327,12 @@ export const FreedomFighters = ({ onBack }: FreedomFightersProps) => {
                   <p className="text-lg font-semibold text-secondary mb-2">
                     Jai Hind! 🇮🇳
                   </p>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-muted-foreground mb-4 leading-relaxed">
                     {selectedFighter.contribution}
                   </p>
                 </div>
-                <div className="flex items-center justify-center space-x-4">
-                  <div className="text-center">
+                <div className="flex items-center justify-center space-x-4 pt-2">
+                  <div className="text-center bg-secondary/10 px-4 py-2 rounded-lg">
                     <div className="text-2xl font-bold text-success">
                       {votes[selectedFighter.id] || 0}
                     </div>
@@ -288,10 +342,11 @@ export const FreedomFighters = ({ onBack }: FreedomFightersProps) => {
                   </div>
                   <Button
                     onClick={() => handleVote(selectedFighter.id)}
-                    className="bg-primary hover:bg-primary-glow"
+                    disabled={isLoading}
+                    className="bg-primary hover:bg-primary-glow disabled:opacity-50 shadow-md hover:shadow-lg transition-all duration-200"
                   >
                     <Heart className="w-4 h-4 mr-2" />
-                    Pay Tribute
+                    {isLoading ? 'Casting Vote...' : 'Pay Tribute'}
                   </Button>
                 </div>
               </div>
